@@ -16,7 +16,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 	protected $filtersState = self::FILTERS_STATE_CLEAN;
 
 	/** @var Filter[] */
-	protected $enabledFilters = [];
+	protected $enabledFilters = array();
 
 	/** @var string */
 	protected $filterHash;

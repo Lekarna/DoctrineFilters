@@ -6,7 +6,7 @@
 
 namespace ZenifyTests\DoctrineFilters;
 
-use Doctrine\DBAL\Driver\DrizzlePDOMySql\Connection;
+use Kdyby\Doctrine\Connection;
 use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Tester\Assert;
@@ -58,7 +58,7 @@ class QueryTest extends TestCase
 		$product2 = $productDao->findOneBy(array('id' => 2));
 		Assert::null($product2);
 
-		// @todo: should be NULL, seems like find() method doesn't take filter into account
+		// this should be NULL; this appears only in CLI
 		$product2 = $productDao->find(2);
 		Assert::type('ZenifyTests\DoctrineFilters\Entities\Product', $product2);
 		Assert::false($product2->isActive());

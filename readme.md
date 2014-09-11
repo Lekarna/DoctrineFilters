@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Zenify/DoctrineFilters.svg?branch=master)](https://travis-ci.org/Zenify/DoctrineFilters)
 [![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-filters.svg)](https://packagist.org/packages/zenify/doctrine-filters)
+[![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-filters.svg)](https://packagist.org/packages/zenify/doctrine-filters)
+
 
 To learn more about filters, [check Ross Tuck's presentation](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15).
 This package simplifies their use and enables DI approach.
@@ -80,7 +82,7 @@ class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
 }
 ```
 
-**2. register service with tag**
+**2. Register service with tag**
 
 `config.neon`
 

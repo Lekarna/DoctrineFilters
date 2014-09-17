@@ -29,9 +29,6 @@ class FiltersExtension extends CompilerExtension
 		$builder->addDefinition($this->prefix('doctrine.filterCollection'))
 			->setClass('Zenify\DoctrineFilters\FilterCollection');
 
-		$builder->getDefinition('doctrine.default.entityManager')
-			->addSetup('setFilterCollection', array('@Zenify\DoctrineFilters\FilterCollection'));
-
 		$builder->addDefinition($this->prefix('filter.event'))
 			->setClass('Zenify\DoctrineFilters\Events\AttachFiltersOnPresenter')
 			->addTag(EventsExtension::TAG_SUBSCRIBER);
@@ -41,6 +38,9 @@ class FiltersExtension extends CompilerExtension
 	public function beforeCompile()
 	{
 		$builder = $this->getContainerBuilder();
+
+		$builder->getDefinition('doctrine.default.entityManager')
+			->addSetup('setFilterCollection', array('@Zenify\DoctrineFilters\FilterCollection'));
 
 		$manager = $builder->getDefinition($this->prefix('manager'));
 		$configuration = $builder->getDefinition('doctrine.default.ormConfiguration');

@@ -12,13 +12,20 @@ use Doctrine;
 
 class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 {
-	/** @var int */
+
+	/**
+	 * @var int
+	 */
 	protected $filtersState = self::FILTERS_STATE_CLEAN;
 
-	/** @var Filter[] */
+	/**
+	 * @var Filter[]
+	 */
 	protected $enabledFilters = array();
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	protected $filterHash;
 
 

@@ -12,10 +12,15 @@ use Nette;
 
 class FilterManager extends Nette\Object
 {
-	/** @var Filter[] */
+
+	/**
+	 * @var Filter[]
+	 */
 	private $filters;
 
-	/** @var FilterCollection */
+	/**
+	 * @var FilterCollection
+	 */
 	private $filterCollection;
 
 

@@ -21,7 +21,10 @@ use Nette;
  */
 abstract class Filter extends Nette\Object
 {
-	/** @var EntityManager */
+
+	/**
+	 * @var EntityManager
+	 */
 	protected $em;
 
 

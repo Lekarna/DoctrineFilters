@@ -13,7 +13,10 @@ use Zenify\DoctrineFilters\FilterManager;
 
 class AttachFiltersOnPresenter implements Subscriber
 {
-	/** @var FilterManager */
+
+	/**
+	 * @var FilterManager
+	 */
 	private $filterManager;
 
 

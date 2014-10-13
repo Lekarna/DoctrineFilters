@@ -18,6 +18,7 @@ use Nette;
  */
 class Product extends Nette\Object
 {
+
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id

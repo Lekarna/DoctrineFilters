@@ -16,6 +16,7 @@ use Nette\Reflection\Property;
 
 class FiltersExtension extends CompilerExtension
 {
+
 	const TAG_FILTER = 'zenify.doctrine.filter';
 
 

@@ -12,7 +12,7 @@ use Nette;
  *
  * @method  int     getId()
  * @method  string  getName()
- * @method  boolean isActive()
+ * @method  bool    isActive()
  * @method  Product setName()
  * @method  Product setActive()
  */
@@ -34,7 +34,7 @@ class Product extends Nette\Object
 
 	/**
 	 * @ORM\Column(type="boolean")
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $active = TRUE;
 

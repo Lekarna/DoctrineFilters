@@ -41,18 +41,18 @@ class FiltersExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->getDefinition('doctrine.default.entityManager')
-			->addSetup('setFilterCollection', array('@Zenify\DoctrineFilters\FilterCollection'));
+			->addSetup('setFilterCollection', ['@Zenify\DoctrineFilters\FilterCollection']);
 
 		$manager = $builder->getDefinition($this->prefix('manager'));
 		$configuration = $builder->getDefinition('doctrine.default.ormConfiguration');
 
 		foreach (array_keys($builder->findByTag(self::TAG_FILTER)) as $serviceName) {
 			$definition = $builder->getDefinition($serviceName)
-				->addSetup('setEm', array('@Kdyby\Doctrine\EntityManager'))
+				->addSetup('setEm', ['@Kdyby\Doctrine\EntityManager'])
 				->setAutowired(FALSE);
 
-			$manager->addSetup('addFilter', array($serviceName, '@' . $serviceName));
-			$configuration->addSetup('addFilter', array($serviceName, $definition->getClass()));
+			$manager->addSetup('addFilter', [$serviceName, '@' . $serviceName]);
+			$configuration->addSetup('addFilter', [$serviceName, $definition->getClass()]);
 		}
 	}
 

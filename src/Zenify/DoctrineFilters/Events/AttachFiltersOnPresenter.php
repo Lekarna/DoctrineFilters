@@ -41,7 +41,7 @@ class AttachFiltersOnPresenter implements Subscriber
 	 */
 	public function getSubscribedEvents()
 	{
-		return array('Nette\Application\Application::onPresenter');
+		return ['Nette\Application\Application::onPresenter'];
 	}
 
 }

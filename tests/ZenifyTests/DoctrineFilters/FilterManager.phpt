@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @testCase
- */
-
 namespace ZenifyTests\DoctrineFilters;
 
 use Kdyby\Doctrine\EntityManager;

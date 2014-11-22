@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @testCase
- */
-
 namespace ZenifyTests\DoctrineFilters;
 
 use Kdyby\Doctrine\Connection;
@@ -46,7 +42,7 @@ class QueryTest extends TestCase
 		$productDao = $this->em->getDao('ZenifyTests\DoctrineFilters\Entities\Product');
 
 
-		$product = $productDao->findOneBy(array('id' => 1));
+		$product = $productDao->findOneBy(['id' => 1]);
 		Assert::type('ZenifyTests\DoctrineFilters\Entities\Product', $product);
 		Assert::true($product->isActive());
 
@@ -55,7 +51,7 @@ class QueryTest extends TestCase
 		Assert::true($product->isActive());
 
 
-		$product2 = $productDao->findOneBy(array('id' => 2));
+		$product2 = $productDao->findOneBy(['id' => 2]);
 		Assert::null($product2);
 
 		// this should be NULL; this appears only in CLI
@@ -64,7 +60,7 @@ class QueryTest extends TestCase
 		Assert::false($product2->isActive());
 
 
-		$product3 = $productDao->findOneBy(array('id' => 3));
+		$product3 = $productDao->findOneBy(['id' => 3]);
 		Assert::null($product3);
 	}
 

@@ -3,12 +3,10 @@
 	"description": "Doctrine Filters integration into Nette",
 	"license": "MIT",
 	"authors": [
-		{
-			"name": "Tomáš Votruba",
-			"homepage": "http://tomasvotruba.cz"
-		}
+		{ "name": "Tomáš Votruba", "homepage": "http://tomasvotruba.cz" }
 	],
 	"require": {
+		"php": ">=5.4",
 		"kdyby/events": "~2.0",
 		"kdyby/doctrine": "~2.0"
 	},

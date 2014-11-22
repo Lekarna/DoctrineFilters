@@ -21,7 +21,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 	/**
 	 * @var Filter[]
 	 */
-	protected $enabledFilters = array();
+	protected $enabledFilters = [];
 
 	/**
 	 * @var string

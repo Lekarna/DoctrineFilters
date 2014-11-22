@@ -5,7 +5,7 @@
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
 
-if (@!include __DIR__ . '/../../vendor/autoload.php') {
+if (@ ! include __DIR__ . '/../../vendor/autoload.php') {
 	echo 'Install Nette Tester using `composer update --dev`';
 	exit(1);
 }
@@ -21,10 +21,10 @@ Tester\Helpers::purge(TEMP_DIR);
 Tracy\Debugger::$logDirectory = TEMP_DIR;
 
 
-$_SERVER = array_intersect_key($_SERVER, array_flip(array(
-	'PHP_SELF', 'SCRIPT_NAME', 'SERVER_ADDR', 'SERVER_SOFTWARE', 'HTTP_HOST', 'DOCUMENT_ROOT', 'OS', 'argc', 'argv')));
+$_SERVER = array_intersect_key($_SERVER, array_flip([
+	'PHP_SELF', 'SCRIPT_NAME', 'SERVER_ADDR', 'SERVER_SOFTWARE', 'HTTP_HOST', 'DOCUMENT_ROOT', 'OS', 'argc', 'argv']));
 $_SERVER['REQUEST_TIME'] = 1234567890;
-$_ENV = $_GET = $_POST = array();
+$_ENV = $_GET = $_POST = [];
 
 
 function run(Tester\TestCase $testCase) {

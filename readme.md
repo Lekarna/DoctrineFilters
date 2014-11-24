@@ -42,15 +42,6 @@ use Nette\Utils\Strings;
 
 class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
 {
-	/** @var Application */
-	private $application;
-
-
-	public function __construct(Application $application)
-	{
-		$this->application = $application;
-	}
-
 
 	/**
 	 * @return string
@@ -62,21 +53,6 @@ class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
 		}
 
 		return '';
-	}
-
-
-	/**
-	 * @return bool
-	 */
-	public function isEnabled()
-	{
-		/** @var Presenter $presenter */
-		$presenter = $this->application->getPresenter();
-		if (Strings::contains($presenter->getReflection()->name, 'FrontModule')) {
-			return TRUE;
-		}
-
-		return FALSE;
 	}
 
 }

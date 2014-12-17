@@ -1,8 +1,10 @@
 # Zenify/DoctrineFilters
 
-[![Build Status](https://travis-ci.org/Zenify/DoctrineFilters.svg?branch=master)](https://travis-ci.org/Zenify/DoctrineFilters)
-[![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-filters.svg)](https://packagist.org/packages/zenify/doctrine-filters)
-[![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-filters.svg)](https://packagist.org/packages/zenify/doctrine-filters)
+[![Build Status](https://img.shields.io/travis/Zenify/DoctrineFilters.svg?style=flat-square)](https://travis-ci.org/Zenify/DoctrineFilters)
+[![Quality Score](https://img.shields.io/scrutinizer/g/Zenify/DoctrineFilters.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineFilters)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Zenify/DoctrineFilters.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineFilters)
+[![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
+[![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
 
 
 To learn more about filters, [check Ross Tuck's presentation](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15).
@@ -11,14 +13,14 @@ This package simplifies their use and enables DI approach.
 
 ## Installation
 
-The best way to install is via [Composer](http://getcomposer.org/).
+Install the latest version via composer:
 
 ```sh
-$ composer require zenify/doctrine-filters:~1.0
+$ composer require zenify/doctrine-filters
 ```
 
 
-Register extensions you need in `config.neon`:
+Register extension in `config.neon`:
 
 ```yaml
 extensions:
@@ -64,9 +66,7 @@ class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
 
 ```yaml
 services:
-	-
-		class: SoftdeletableFilter
-		tags: [zenify.doctrine.filter]
+	- {class: SoftdeletableFilter, tags: [zenify.doctrine.filter]}
 ```
 
 

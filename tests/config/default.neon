@@ -13,4 +13,3 @@ extensions:
 doctrine:
 	driver: pdo_sqlite
 	memory: true
-	logging: ../../tmp/log.sql

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZenifyTests\DoctrineFilters\Entities;
+namespace Zenify\DoctrineFilters\Tests\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Nette;

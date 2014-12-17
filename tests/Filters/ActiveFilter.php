@@ -1,6 +1,6 @@
 <?php
 
-namespace ZenifyTests\DoctrineFilters\Filters;
+namespace Zenify\DoctrineFilters\Tests\Filters;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Zenify\DoctrineFilters\Filter;

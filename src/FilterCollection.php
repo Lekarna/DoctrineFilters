@@ -8,6 +8,7 @@
 namespace Zenify\DoctrineFilters;
 
 use Doctrine;
+use InvalidArgumentException;
 
 
 class FilterCollection extends Doctrine\ORM\Query\FilterCollection
@@ -80,12 +81,12 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 	/**
 	 * @param string $name
 	 * @return Filter
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function getFilter($name)
 	{
 		if ( ! isset($this->enabledFilters[$name])) {
-			throw new \InvalidArgumentException("Filter '" . $name . "' is not enabled.");
+			throw new InvalidArgumentException("Filter '" . $name . "' is not enabled.");
 		}
 
 		return $this->enabledFilters[$name];

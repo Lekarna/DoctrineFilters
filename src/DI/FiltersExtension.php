@@ -7,11 +7,15 @@
 
 namespace Zenify\DoctrineFilters\DI;
 
+use Doctrine;
 use Kdyby\Doctrine\EntityManager;
 use Kdyby\Events\DI\EventsExtension;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
 use Nette\Reflection\Property;
+use Zenify\DoctrineFilters\Events\AttachFiltersOnPresenter;
+use Zenify\DoctrineFilters\FilterCollection;
+use Zenify\DoctrineFilters\FilterManager;
 
 
 class FiltersExtension extends CompilerExtension
@@ -25,13 +29,13 @@ class FiltersExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('manager'))
-			->setClass('Zenify\DoctrineFilters\FilterManager');
+			->setClass(FilterManager::class);
 
 		$builder->addDefinition($this->prefix('doctrine.filterCollection'))
-			->setClass('Zenify\DoctrineFilters\FilterCollection');
+			->setClass(FilterCollection::class);
 
 		$builder->addDefinition($this->prefix('filter.event'))
-			->setClass('Zenify\DoctrineFilters\Events\AttachFiltersOnPresenter')
+			->setClass(AttachFiltersOnPresenter::class)
 			->addTag(EventsExtension::TAG_SUBSCRIBER);
 	}
 
@@ -41,14 +45,14 @@ class FiltersExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->getDefinition('doctrine.default.entityManager')
-			->addSetup('setFilterCollection', ['@Zenify\DoctrineFilters\FilterCollection']);
+			->addSetup('setFilterCollection', ['@' . FilterCollection::class]);
 
 		$manager = $builder->getDefinition($this->prefix('manager'));
 		$configuration = $builder->getDefinition('doctrine.default.ormConfiguration');
 
 		foreach (array_keys($builder->findByTag(self::TAG_FILTER)) as $serviceName) {
 			$definition = $builder->getDefinition($serviceName)
-				->addSetup('setEm', ['@Kdyby\Doctrine\EntityManager'])
+				->addSetup('setEm', ['@' . EntityManager::class])
 				->setAutowired(FALSE);
 
 			$manager->addSetup('addFilter', [$serviceName, '@' . $serviceName]);
@@ -72,7 +76,7 @@ class FiltersExtension extends CompilerExtension
 	public static function registerEmSetFilterCollection()
 	{
 		EntityManager::extensionMethod('setFilterCollection', function (EntityManager $em, $most) {
-			$property = new Property('Doctrine\ORM\EntityManager', 'filterCollection');
+			$property = new Property(Doctrine\ORM\EntityManager::class, 'filterCollection');
 			$property->setAccessible(TRUE);
 			$property->setValue($em, $most);
 		});

@@ -9,7 +9,6 @@ namespace Zenify\DoctrineFilters;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Kdyby\Doctrine\Connection;
 use Nette;
 
 

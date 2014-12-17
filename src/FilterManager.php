@@ -7,10 +7,8 @@
 
 namespace Zenify\DoctrineFilters;
 
-use Nette;
 
-
-class FilterManager extends Nette\Object
+class FilterManager
 {
 
 	/**

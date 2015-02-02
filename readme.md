@@ -7,8 +7,9 @@
 [![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
 
 
-To learn more about filters, [check Ross Tuck's presentation](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15).
-This package simplifies their use and enables DI approach.
+Don't know Doctrine Filters? Check [these few slides](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15) to get the knowledge.
+
+They are present in Doctrine by default. **This package simplifies their use in modular application.**
 
 
 ## Installation

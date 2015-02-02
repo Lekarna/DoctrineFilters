@@ -28,7 +28,7 @@ extensions:
 ```
 
 
-## Doctrine Filters
+## Usage
 
 Let's create your first filter, which will hide all deleted items on front.
 This is usually called soft delete - data remains in database, but are filtered out for normal user.
@@ -71,3 +71,100 @@ services:
 
 
 That's it!
+
+
+## Limit Access by Role or Module
+
+Use case 1: show deleted content only to logged user with *admin* role.
+So we can turn on the filtering when all these conditions are not met.
+
+```php
+use Nette\Security\User;
+
+
+class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
+{
+
+	/**
+	 * @var User
+	 */
+	private $user;
+	
+
+	public function __construct(User $user)
+	{
+		$this->user = $user;
+	}
+
+	
+	/**
+	 * @return string
+	 */
+	public function addFilterConstraint(ClassMetadata $entity, $alias)
+	{
+		// same as above
+	}
+	
+	
+	/**
+	 * @return bool
+	 */
+	public function isEnabled()
+	{
+		if ($this->user->isLoggedIn() && $this->user->hasRole('admin')) {
+			return FALSE;
+		}
+		return TRUE;
+	}
+	
+}
+```
+
+---
+
+Use case 2: show deleted content only in *admin* module. 
+
+```php
+use Nette\Application\Application;
+use Nette\Application\UI\Presenter;
+
+
+class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
+{
+
+	/**
+	 * @var Application
+	 */
+	private $application;
+	
+
+	public function __construct(Application $application)
+	{
+		$this->application = $application;
+	}
+
+	
+	/**
+	 * @return string
+	 */
+	public function addFilterConstraint(ClassMetadata $entity, $alias)
+	{
+		// same as above
+	}
+	
+	
+	/**
+	 * @return bool
+	 */
+	public function isEnabled()
+	{
+		/** @var Presenter $presenter */
+	    $presenter = $this->application->getPresenter();
+		if (strpos($presenter->getReflection()->name, 'AdminModule') !== FALSE) {
+			return FALSE;
+		}
+		return TRUE;
+	}
+	
+}
+```

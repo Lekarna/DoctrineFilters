@@ -14,7 +14,7 @@ class FilterManager
 	/**
 	 * @var Filter[]
 	 */
-	private $filters;
+	private $filters = [];
 
 	/**
 	 * @var FilterCollection

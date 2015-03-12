@@ -1,4 +1,4 @@
-# Zenify/DoctrineFilters
+# Doctrine Filters
 
 [![Build Status](https://img.shields.io/travis/Zenify/DoctrineFilters.svg?style=flat-square)](https://travis-ci.org/Zenify/DoctrineFilters)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Zenify/DoctrineFilters.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineFilters)
@@ -12,14 +12,13 @@ Don't know Doctrine Filters? Check [these few slides](https://speakerdeck.com/ro
 They are present in Doctrine by default. **This package simplifies their use in modular application.**
 
 
-## Installation
+## Install
 
-Install the latest version via composer:
+Via Composer:
 
 ```sh
 $ composer require zenify/doctrine-filters
 ```
-
 
 Register extension in `config.neon`:
 

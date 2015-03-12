@@ -8,7 +8,8 @@
 	"require": {
 		"php": ">=5.5",
 		"kdyby/events": "~2.0",
-		"kdyby/doctrine": "~2.0"
+		"kdyby/doctrine": "~2.0",
+		"tracy/tracy": "~2.2"
 	},
 	"require-dev": {
 		"nette/bootstrap": "~2.2",

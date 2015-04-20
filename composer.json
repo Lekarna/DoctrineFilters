@@ -1,5 +1,6 @@
 {
 	"name": "zenify/doctrine-filters",
+	"type": "nette-extension",
 	"description": "Doctrine Filters integration into Nette",
 	"license": "MIT",
 	"authors": [

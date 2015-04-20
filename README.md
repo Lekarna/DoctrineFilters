@@ -33,16 +33,17 @@ extensions:
 Let's create your first filter, which will hide all deleted items on front.
 This is usually called soft delete - data remains in database, but are filtered out for normal user.
 
-**1. Extend from `Zenify\DoctrineFilters\Filter` and complete required methods.**
+**1. Extend from `Zenify\DoctrineFilters\AbstractFilter` and complete required methods.**
 
 ```php
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Nette\Application\Application;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\Strings;
+use Zenify\DoctrineFilters\AbstractFilter;
 
 
-class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
+class SoftdeletableFilter extends AbstractFilter
 {
 
 	/**
@@ -60,13 +61,13 @@ class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
 }
 ```
 
-**2. Register service with tag**
+**2. Register service**
 
 `config.neon`
 
 ```yaml
 services:
-	- {class: SoftdeletableFilter, tags: [zenify.doctrine.filter]}
+	- SoftdeletableFilter
 ```
 
 
@@ -80,9 +81,9 @@ So we can turn on the filtering when all these conditions are not met.
 
 ```php
 use Nette\Security\User;
+use Zenify\DoctrineFilters\AbstractFilter;
 
-
-class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
+class SoftdeletableFilter extends AbstractFilter
 {
 
 	/**
@@ -127,9 +128,10 @@ Use case 2: show deleted content only in *admin* module.
 ```php
 use Nette\Application\Application;
 use Nette\Application\UI\Presenter;
+use Zenify\DoctrineFilters\AbstractFilter;
 
 
-class SoftdeletableFilter extends Zenify\DoctrineFilters\Filter
+class SoftdeletableFilter extends AbstractFilter
 {
 
 	/**

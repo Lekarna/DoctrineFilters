@@ -6,16 +6,12 @@ php:
   - 7.0
 
 matrix:
-  include:
-    - php: 5.5
-      env: NETTE_VERSION='2.2.*'
   allow_failures:
     - php: 7.0
 
 install:
   - composer create-project --prefer-source --dev --no-interaction zenify/ci vendor/ci @dev
   - . vendor/ci/travis/coverage-init.sh
-  - sh -c 'if [ "$NETTE_VERSION" != "" ]; then composer require --no-update nette/nette=$NETTE_VERSION; fi;'
   - composer install --prefer-source
 
 before_script:

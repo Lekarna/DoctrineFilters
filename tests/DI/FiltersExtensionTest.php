@@ -3,6 +3,7 @@
 namespace Zenify\DoctrineFilters\Tests\DI;
 
 use Nette;
+use Nette\DI\Container;
 use PHPUnit_Framework_TestCase;
 use Zenify;
 use Zenify\DoctrineFilters\Events\AttachFiltersOnPresenter;
@@ -15,7 +16,7 @@ class FiltersExtensionTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * @var Nette\DI\Container
+	 * @var Container
 	 */
 	private $container;
 
@@ -29,16 +30,15 @@ class FiltersExtensionTest extends PHPUnit_Framework_TestCase
 	public function testExtension()
 	{
 		$this->assertInstanceOf(
-			FilterCollection::class,
-			$this->container->getByType(FilterCollection::class)
+			FilterCollection::class, $this->container->getByType(FilterCollection::class)
 		);
+
 		$this->assertInstanceOf(
-			FilterManager::class,
-			$this->container->getByType(FilterManager::class)
+			FilterManager::class, $this->container->getByType(FilterManager::class)
 		);
+
 		$this->assertInstanceOf(
-			AttachFiltersOnPresenter::class,
-			$this->container->getByType(AttachFiltersOnPresenter::class)
+			AttachFiltersOnPresenter::class, $this->container->getByType(AttachFiltersOnPresenter::class)
 		);
 	}
 

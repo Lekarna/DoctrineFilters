@@ -27,6 +27,11 @@ class FilterManagerQueryTest extends PHPUnit_Framework_TestCase
 	public function __construct()
 	{
 		$this->container = (new ContainerFactory)->create();
+	}
+
+
+	protected function setUp()
+	{
 		$this->entityManager = $this->container->getByType(EntityManager::class);
 		$this->prepareDbData();
 	}
@@ -59,16 +64,16 @@ class FilterManagerQueryTest extends PHPUnit_Framework_TestCase
 	{
 		/** @var Connection $connection */
 		$connection = $this->container->getByType(Connection::class);
-		$connection->query('CREATE TABLE product (id INTEGER NOT NULL, name string, active int NULL, PRIMARY KEY(id))');
+		$connection->query('CREATE TABLE product (id INTEGER NOT NULL, name string, is_active int NULL, PRIMARY KEY(id))');
 
 		$product = new Product;
 		$product->setName('Brand new ruler');
-		$product->setActive(1);
+		$product->setIsActive(TRUE);
 		$this->entityManager->persist($product);
 
 		$product2 = new Product;
 		$product2->setName('Black screw');
-		$product2->setActive(0);
+		$product2->setIsActive(FALSE);
 		$this->entityManager->persist($product2);
 		$this->entityManager->flush();
 	}

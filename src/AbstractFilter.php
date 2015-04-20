@@ -9,22 +9,25 @@ namespace Zenify\DoctrineFilters;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Nette;
 
 
 /**
  * The base class that user defined filters should extend.
  * Handles the setting and escaping of parameters.
- *
- * @method  Filter  setEm(object)
  */
-abstract class Filter extends Nette\Object
+abstract class AbstractFilter
 {
 
 	/**
 	 * @var EntityManager
 	 */
-	protected $em;
+	protected $entityManager;
+
+
+	public function setEntityManager(EntityManager $entityManager)
+	{
+		$this->entityManager = $entityManager;
+	}
 
 
 	/**
@@ -48,12 +51,12 @@ abstract class Filter extends Nette\Object
 
 
 	/**
-	 * @param string $s
+	 * @param string $text
 	 * @return string
 	 */
-	protected function escape($s)
+	protected function escape($text)
 	{
-		return $this->em->getConnection()->quote($s);
+		return $this->entityManager->getConnection()->quote($text);
 	}
 
 

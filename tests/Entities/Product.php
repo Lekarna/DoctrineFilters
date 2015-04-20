@@ -3,39 +3,78 @@
 namespace Zenify\DoctrineFilters\Tests\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Nette;
 
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="product")
- *
- * @method  int     getId()
- * @method  string  getName()
- * @method  bool    isActive()
- * @method  Product setName()
- * @method  Product setActive()
  */
-class Product extends Nette\Object
+class Product
 {
 
 	/**
 	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue
+	 * @var int
 	 */
-	public $id;
+	private $id;
 
 	/**
 	 * @ORM\Column(type="string", nullable=TRUE)
 	 * @var string
 	 */
-	protected $name;
+	private $name;
 
 	/**
 	 * @ORM\Column(type="boolean")
 	 * @var bool
 	 */
-	protected $active = TRUE;
+	private $isActive = TRUE;
+
+
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	public function isActive()
+	{
+		return $this->isActive;
+	}
+
+
+	/**
+	 * @param bool $isActive
+	 */
+	public function setIsActive($isActive)
+	{
+		$this->isActive = $isActive;
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+
+	/**
+	 * @param string $name
+	 */
+	public function setName($name)
+	{
+		$this->name = $name;
+	}
 
 }

@@ -2,11 +2,11 @@
 
 namespace ZenifyTests\DoctrineFilters;
 
+use DateTime;
 use Kdyby\Doctrine\EntityManager;
-use Nette;
+use Nette\DI\Container;
 use PHPUnit_Framework_TestCase;
-use Zenify;
-use Zenify\DoctrineFilters\Filter;
+use Zenify\DoctrineFilters\AbstractFilter;
 use Zenify\DoctrineFilters\FilterCollection;
 use Zenify\DoctrineFilters\FilterManager;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
@@ -16,7 +16,7 @@ class FilterManagerTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * @var Nette\DI\Container
+	 * @var Container
 	 */
 	private $container;
 
@@ -49,13 +49,13 @@ class FilterManagerTest extends PHPUnit_Framework_TestCase
 		$filterManager->attachEnabledFilters();
 
 		$count = 1;
-		$date = new \DateTime;
+		$date = new DateTime;
 		if ($date->format('H') >= 12) {
 			$count++;
 		}
 		$this->assertSame($count, count($filterCollection->getEnabledFilters()));
 		foreach ($filterCollection->getEnabledFilters() as $filter) {
-			$this->assertInstanceOf(Filter::class, $filter);
+			$this->assertInstanceOf(AbstractFilter::class, $filter);
 		}
 	}
 

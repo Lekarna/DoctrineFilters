@@ -12,7 +12,7 @@ class FilterManager
 {
 
 	/**
-	 * @var Filter[]
+	 * @var AbstractFilter[]
 	 */
 	private $filters = [];
 
@@ -30,9 +30,9 @@ class FilterManager
 
 	/**
 	 * @param string $name
-	 * @param Filter $filter
+	 * @param AbstractFilter $filter
 	 */
-	public function addFilter($name, Filter $filter)
+	public function addFilter($name, AbstractFilter $filter)
 	{
 		$this->filters[$name] = $filter;
 	}

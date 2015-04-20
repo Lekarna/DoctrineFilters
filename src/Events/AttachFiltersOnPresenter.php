@@ -8,6 +8,7 @@
 namespace Zenify\DoctrineFilters\Events;
 
 use Kdyby\Events\Subscriber;
+use Nette\Application\Application;
 use Zenify\DoctrineFilters\FilterManager;
 
 
@@ -37,11 +38,11 @@ class AttachFiltersOnPresenter implements Subscriber
 
 
 	/**
-	 * @return array
+	 * {@inheritdoc}
 	 */
 	public function getSubscribedEvents()
 	{
-		return ['Nette\Application\Application::onPresenter'];
+		return [Application::class . '::onPresenter'];
 	}
 
 }

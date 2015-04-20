@@ -2,17 +2,16 @@
 
 namespace Zenify\DoctrineFilters\Tests\Filters;
 
+use DateTime;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Zenify\DoctrineFilters\Filter;
+use Zenify\DoctrineFilters\AbstractFilter;
 
 
-class ConditionFilter extends Filter
+class ConditionFilter extends AbstractFilter
 {
 
 	/**
-	 * @param ClassMetaData $targetEntity
-	 * @param string $targetTableAlias
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
 	{
@@ -21,11 +20,11 @@ class ConditionFilter extends Filter
 
 
 	/**
-	 * @return bool
+	 * {@inheritdoc}
 	 */
 	public function isEnabled()
 	{
-		$date = new \DateTime;
+		$date = new DateTime;
 		if ($date->format('H') >= 12) {
 			return TRUE;
 		}

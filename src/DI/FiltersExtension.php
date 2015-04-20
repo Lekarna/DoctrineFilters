@@ -14,15 +14,13 @@ use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
 use Nette\Reflection\Property;
 use Zenify\DoctrineFilters\Events\AttachFiltersOnPresenter;
+use Zenify\DoctrineFilters\AbstractFilter;
 use Zenify\DoctrineFilters\FilterCollection;
 use Zenify\DoctrineFilters\FilterManager;
 
 
 class FiltersExtension extends CompilerExtension
 {
-
-	const TAG_FILTER = 'zenify.doctrine.filter';
-
 
 	public function loadConfiguration()
 	{
@@ -50,13 +48,12 @@ class FiltersExtension extends CompilerExtension
 		$manager = $builder->getDefinition($this->prefix('manager'));
 		$configuration = $builder->getDefinition('doctrine.default.ormConfiguration');
 
-		foreach (array_keys($builder->findByTag(self::TAG_FILTER)) as $serviceName) {
-			$definition = $builder->getDefinition($serviceName)
-				->addSetup('setEm', ['@' . EntityManager::class])
+		foreach ($builder->findByType(AbstractFilter::class) as $name => $filterDefinition) {
+			$filterDefinition->addSetup('setEntityManager', ['@' . EntityManager::class])
 				->setAutowired(FALSE);
 
-			$manager->addSetup('addFilter', [$serviceName, '@' . $serviceName]);
-			$configuration->addSetup('addFilter', [$serviceName, $definition->getClass()]);
+			$manager->addSetup('addFilter', [$name, '@' . $name]);
+			$configuration->addSetup('addFilter', [$name, $filterDefinition->getClass()]);
 		}
 	}
 

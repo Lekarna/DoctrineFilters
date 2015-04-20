@@ -9,9 +9,10 @@ namespace Zenify\DoctrineFilters;
 
 use Doctrine;
 use InvalidArgumentException;
+use Doctrine\ORM\Query\FilterCollection as BaseFilterCollection;
 
 
-class FilterCollection extends Doctrine\ORM\Query\FilterCollection
+class FilterCollection extends BaseFilterCollection
 {
 
 	/**
@@ -20,7 +21,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 	protected $filtersState = self::FILTERS_STATE_CLEAN;
 
 	/**
-	 * @var Filter[]
+	 * @var AbstractFilter[]
 	 */
 	protected $enabledFilters = [];
 
@@ -30,6 +31,9 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 	protected $filterHash;
 
 
+	/**
+	 * Intentionally empty to release parent dependencies.
+	 */
 	public function __construct()
 	{
 	}
@@ -37,10 +41,10 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 
 	/**
 	 * @param string
-	 * @param Filter
-	 * @return Filter
+	 * @param AbstractFilter
+	 * @return AbstractFilter
 	 */
-	public function attach($name, Filter $filter)
+	public function attach($name, AbstractFilter $filter)
 	{
 		if ( ! isset($this->enabledFilters[$name])) {
 			$this->enabledFilters[$name] = $filter;
@@ -55,7 +59,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 
 
 	/**
-	 * @return array
+	 * {@inheritdoc}
 	 */
 	public function getEnabledFilters()
 	{
@@ -64,8 +68,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 
 
 	/**
-	 * @param string $name
-	 * @return Doctrine\ORM\Query\Filter\SQLFilter|Filter
+	 * {@inheritdoc}
 	 */
 	public function disable($name)
 	{
@@ -79,9 +82,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 
 
 	/**
-	 * @param string $name
-	 * @return Filter
-	 * @throws InvalidArgumentException
+	 * {@inheritdoc}
 	 */
 	public function getFilter($name)
 	{
@@ -94,8 +95,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 
 
 	/**
-	 * @param string $name
-	 * @return bool
+	 * {@inheritdoc}
 	 */
 	public function isEnabled($name)
 	{
@@ -104,7 +104,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 
 
 	/**
-	 * @return bool
+	 * {@inheritdoc}
 	 */
 	public function isClean()
 	{
@@ -113,7 +113,7 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 
 
 	/**
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function getHash()
 	{
@@ -130,6 +130,9 @@ class FilterCollection extends Doctrine\ORM\Query\FilterCollection
 	}
 
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function setFiltersStateDirty()
 	{
 		$this->filtersState = self::FILTERS_STATE_DIRTY;

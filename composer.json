@@ -14,11 +14,7 @@
 		"tracy/tracy": "~2.3"
 	},
 	"require-dev": {
-		"nette/bootstrap": "~2.3",
-		"nette/http": "~2.3",
-		"nette/mail": "~2.3",
-		"nette/safe-stream": "~2.3",
-		"nette/utils": "~2.3"
+		"nette/bootstrap": "~2.3"
 	},
 	"autoload": {
 		"psr-4": {

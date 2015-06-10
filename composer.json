@@ -8,13 +8,13 @@
 	],
 	"require": {
 		"php": ">=5.5",
-		"kdyby/events": "~2.2",
-		"kdyby/doctrine": "~2.3",
-		"nette/di": "~2.3",
-		"tracy/tracy": "~2.3"
+		"doctrine/orm": "~2.5.0",
+		"kdyby/doctrine": "~2.3.0",
+		"nette/di": "~2.3.0",
+		"symnedi/event-dispatcher": "~0.1"
 	},
 	"require-dev": {
-		"nette/bootstrap": "~2.3"
+		"nette/bootstrap": "~2.3.0"
 	},
 	"autoload": {
 		"psr-4": {

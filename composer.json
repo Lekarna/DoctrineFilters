@@ -15,7 +15,7 @@
 	},
 	"require-dev": {
 		"nette/bootstrap": "~2.3.0",
-		"tracy/tracy": "^2.3"
+		"tracy/tracy": "~2.3.0"
 	},
 	"autoload": {
 		"psr-4": {

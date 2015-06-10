@@ -9,10 +9,8 @@ namespace Zenify\DoctrineFilters\DI;
 
 use Doctrine\ORM\Configuration;
 use Nette\DI\CompilerExtension;
-use Nette\DI\ServiceDefinition;
 use Zenify\DoctrineFilters\Contract\FilterInterface;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
-use Zenify\DoctrineFilters\Exception\DefinitionForTypeNotFoundException;
 
 
 class FiltersExtension extends CompilerExtension
@@ -30,36 +28,16 @@ class FiltersExtension extends CompilerExtension
 	{
 		$containerBuilder = $this->getContainerBuilder();
 
-		$filterManagerDefinition = $this->getDefinitionByType(FilterManagerInterface::class);
-		$ormConfigurationDefinition = $this->getDefinitionByType(Configuration::class);
+		$definitionFinder = new DefinitionFinder($containerBuilder);
+		$filterManagerDefinition = $definitionFinder->getDefinitionByType(FilterManagerInterface::class);
+		$ormConfigurationDefinition = $definitionFinder->getDefinitionByType(Configuration::class);
 
 		foreach ($containerBuilder->findByType(FilterInterface::class) as $name => $filterDefinition) {
-			// once to filter manager to run conditions and enable allowed only
-			$filterManagerDefinition->addSetup('addFilter', [$name, '@' . $name]);
-			// second for Doctrine itself
-			$ormConfigurationDefinition->addSetup('addFilter', [$name, $filterDefinition->getClass()]);
+			// 1) to filter manager to run conditions and enable allowed only
+			$filterManagerDefinition->addSetup('addFilter', [$name, '@' . $filterDefinition->getClass()]);
+			// 2) to Doctrine itself
+			$ormConfigurationDefinition->addSetup('addFilter', [$name, '@' . $filterDefinition->getClass()]);
 		}
-	}
-
-
-	/**
-	 * @param string $type
-	 * @return ServiceDefinition
-	 */
-	private function getDefinitionByType($type)
-	{
-		$containerBuilder = $this->getContainerBuilder();
-		if ($name = $containerBuilder->getByType($type)) {
-			return $containerBuilder->getDefinition($name);
-		}
-
-		foreach ($containerBuilder->findByType($type) as $definition) {
-			return $definition;
-		}
-
-		throw new DefinitionForTypeNotFoundException(
-			sprintf('Definition for type "%s" was not found.', $type)
-		);
 	}
 
 }

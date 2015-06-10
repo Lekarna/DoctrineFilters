@@ -7,14 +7,15 @@
 		{ "name": "Tomáš Votruba", "homepage": "http://tomasvotruba.cz" }
 	],
 	"require": {
-		"php": ">=5.5",
-		"doctrine/orm": "~2.5.0",
+		"php": ">=5.6",
+		"doctrine/orm": ">=2.4.0",
 		"kdyby/doctrine": "~2.3.0",
 		"nette/di": "~2.3.0",
 		"symnedi/event-dispatcher": "~0.1"
 	},
 	"require-dev": {
-		"nette/bootstrap": "~2.3.0"
+		"nette/bootstrap": "~2.3.0",
+		"tracy/tracy": "^2.3"
 	},
 	"autoload": {
 		"psr-4": {

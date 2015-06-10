@@ -19,7 +19,7 @@ interface FilterManagerInterface
 
 
 	/**
-	 * Enables filters that meet its conditions.
+	 * Enables all filters that meet its conditions.
 	 */
 	function enableFilters();
 

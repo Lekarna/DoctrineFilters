@@ -3,8 +3,10 @@
 namespace Zenify\DoctrineFilters\Tests\EventSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Nette\Application\Application;
 use PHPUnit_Framework_TestCase;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symnedi\EventDispatcher\Event\ApplicationRequestEvent;
+use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
 
 
@@ -12,30 +14,31 @@ class LoadFiltersSubscriberTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * @var Application
-	 */
-	private $application;
-
-	/**
 	 * @var EntityManagerInterface
 	 */
 	private $entityManager;
+
+	/**
+	 * @var EventDispatcherInterface
+	 */
+	private $eventDispatcher;
 
 
 	protected function setUp()
 	{
 		$container = (new ContainerFactory)->create();
-		$this->application = $container->getByType(Application::class);
+		$this->eventDispatcher = $container->getByType(EventDispatcherInterface::class);
 		$this->entityManager = $container->getByType(EntityManagerInterface::class);
 	}
 
 
-	public function testDisptachEvent()
+	public function testDispatchEvent()
 	{
 		$filters = $this->entityManager->getFilters();
 		$this->assertCount(0, $filters->getEnabledFilters());
 
-		$this->application->run();
+		$eventMock = $this->prophesize(ApplicationRequestEvent::class);
+		$this->eventDispatcher->dispatch(NetteApplicationEvents::ON_REQUEST, $eventMock->reveal());
 
 		$this->assertCount(2, $filters->getEnabledFilters());
 	}

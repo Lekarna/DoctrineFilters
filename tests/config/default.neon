@@ -1,3 +1,7 @@
+application:
+	scanComposer: false
+
+
 services:
 	- Zenify\DoctrineFilters\Tests\FilterManager\Source\ActiveFilter
 	- Zenify\DoctrineFilters\Tests\FilterManager\Source\EnabledFilter
@@ -6,7 +10,6 @@ services:
 
 extensions:
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
-	- Kdyby\Console\DI\ConsoleExtension
 	- Symnedi\EventDispatcher\DI\EventDispatcherExtension # intentionally above Kdyby\Events due to removeDefinition bug
 	- Kdyby\Events\DI\EventsExtension
 	- Kdyby\Annotations\DI\AnnotationsExtension

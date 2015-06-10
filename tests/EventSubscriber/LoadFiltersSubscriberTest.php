@@ -4,18 +4,12 @@ namespace Zenify\DoctrineFilters\Tests\EventSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Nette\Application\Application;
-use Nette\DI\Container;
 use PHPUnit_Framework_TestCase;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
 
 
 class LoadFiltersSubscriberTest extends PHPUnit_Framework_TestCase
 {
-
-	/**
-	 * @var Container
-	 */
-	private $container;
 
 	/**
 	 * @var Application
@@ -30,9 +24,9 @@ class LoadFiltersSubscriberTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->container = (new ContainerFactory)->create();
-		$this->application = $this->container->getByType(Application::class);
-		$this->entityManager = $this->container->getByType(EntityManagerInterface::class);
+		$container = (new ContainerFactory)->create();
+		$this->application = $container->getByType(Application::class);
+		$this->entityManager = $container->getByType(EntityManagerInterface::class);
 	}
 
 

@@ -7,16 +7,12 @@
 
 namespace Zenify\DoctrineFilters\DI;
 
-use Doctrine;
-use Kdyby\Doctrine\EntityManager;
-use Kdyby\Events\DI\EventsExtension;
+use Doctrine\ORM\Configuration;
 use Nette\DI\CompilerExtension;
-use Nette\PhpGenerator\ClassType;
-use Nette\Reflection\Property;
-use Zenify\DoctrineFilters\Events\AttachFiltersOnPresenter;
-use Zenify\DoctrineFilters\AbstractFilter;
-use Zenify\DoctrineFilters\FilterCollection;
-use Zenify\DoctrineFilters\FilterManager;
+use Nette\DI\ServiceDefinition;
+use Zenify\DoctrineFilters\Contract\FilterInterface;
+use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
+use Zenify\DoctrineFilters\Exception\DefinitionForTypeNotFoundException;
 
 
 class FiltersExtension extends CompilerExtension
@@ -24,59 +20,46 @@ class FiltersExtension extends CompilerExtension
 
 	public function loadConfiguration()
 	{
-		$builder = $this->getContainerBuilder();
-
-		$builder->addDefinition($this->prefix('manager'))
-			->setClass(FilterManager::class);
-
-		$builder->addDefinition($this->prefix('doctrine.filterCollection'))
-			->setClass(FilterCollection::class);
-
-		$builder->addDefinition($this->prefix('filter.event'))
-			->setClass(AttachFiltersOnPresenter::class)
-			->addTag(EventsExtension::TAG_SUBSCRIBER);
+		$containerBuilder = $this->getContainerBuilder();
+		$services = $this->loadFromFile(__DIR__ . '/services.neon');
+		$this->compiler->parseServices($containerBuilder, $services);
 	}
 
 
 	public function beforeCompile()
 	{
-		$builder = $this->getContainerBuilder();
+		$containerBuilder = $this->getContainerBuilder();
 
-		$builder->getDefinition('doctrine.default.entityManager')
-			->addSetup('setFilterCollection', ['@' . FilterCollection::class]);
+		$filterManagerDefinition = $this->getDefinitionByType(FilterManagerInterface::class);
+		$ormConfigurationDefinition = $this->getDefinitionByType(Configuration::class);
 
-		$manager = $builder->getDefinition($this->prefix('manager'));
-		$configuration = $builder->getDefinition('doctrine.default.ormConfiguration');
-
-		foreach ($builder->findByType(AbstractFilter::class) as $name => $filterDefinition) {
-			$filterDefinition->addSetup('setEntityManager', ['@' . EntityManager::class])
-				->setAutowired(FALSE);
-
-			$manager->addSetup('addFilter', [$name, '@' . $name]);
-			$configuration->addSetup('addFilter', [$name, $filterDefinition->getClass()]);
+		foreach ($containerBuilder->findByType(FilterInterface::class) as $name => $filterDefinition) {
+			// once to filter manager to run conditions and enable allowed only
+			$filterManagerDefinition->addSetup('addFilter', [$name, '@' . $name]);
+			// second for Doctrine itself
+			$ormConfigurationDefinition->addSetup('addFilter', [$name, $filterDefinition->getClass()]);
 		}
 	}
 
 
-	public function afterCompile(ClassType $class)
-	{
-		$methods = $class->getMethods();
-		$init = $methods['initialize'];
-		$init->addBody(__CLASS__ . '::registerEmSetFilterCollection();');
-	}
-
-
 	/**
-	 * Replace native getFilter where filterCollection is instanced statically
-	 * by DI service approach
+	 * @param string $type
+	 * @return ServiceDefinition
 	 */
-	public static function registerEmSetFilterCollection()
+	private function getDefinitionByType($type)
 	{
-		EntityManager::extensionMethod('setFilterCollection', function (EntityManager $em, $most) {
-			$property = new Property(Doctrine\ORM\EntityManager::class, 'filterCollection');
-			$property->setAccessible(TRUE);
-			$property->setValue($em, $most);
-		});
+		$containerBuilder = $this->getContainerBuilder();
+		if ($name = $containerBuilder->getByType($type)) {
+			return $containerBuilder->getDefinition($name);
+		}
+
+		foreach ($containerBuilder->findByType($type) as $definition) {
+			return $definition;
+		}
+
+		throw new DefinitionForTypeNotFoundException(
+			sprintf('Definition for type "%s" was not found.', $type)
+		);
 	}
 
 }

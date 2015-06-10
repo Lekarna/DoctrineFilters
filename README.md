@@ -7,9 +7,9 @@
 [![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
 
 
-Don't know Doctrine Filters? Check [these few slides](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15) to get the knowledge.
+What are Doctrine Filters? Check [these few slides](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15) to get the knowledge.
 
-They are present in Doctrine by default. **This package simplifies their use in modular application.**
+They are present in Doctrine by default. This package only simplifies their use in modular application.
 
 
 ## Install
@@ -25,25 +25,24 @@ Register extension in `config.neon`:
 ```yaml
 extensions:
 	- Zenify\DoctrineFilters\DI\FiltersExtension
+	- Symnedi\EventDispatcher\DI\EventDispatcherExtensions
+	- Kdyby\Doctrine\DI\OrmExtension
 ```
 
 
 ## Usage
 
-Let's create your first filter, which will hide all deleted items on front.
-This is usually called soft delete - data remains in database, but are filtered out for normal user.
+Let's create our first filter, which will hide all deleted items on front.
+So called "soft delete" - data remains in database, but are filtered out in frontend.
 
-**1. Extend from `Zenify\DoctrineFilters\AbstractFilter` and complete required methods.**
+First, we create class implementing [`Zenify\DoctrineFilters\Contract\FilterInterface`](...)
 
 ```php
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Nette\Application\Application;
-use Nette\Application\UI\Presenter;
-use Nette\Utils\Strings;
-use Zenify\DoctrineFilters\AbstractFilter;
+use Zenify\DoctrineFilters\Contract\FilterInterface;
 
 
-class SoftdeletableFilter extends AbstractFilter
+class SoftdeletableFilter extends FilterInterface
 {
 
 	/**
@@ -61,7 +60,7 @@ class SoftdeletableFilter extends AbstractFilter
 }
 ```
 
-**2. Register service**
+Then register as service:
 
 `config.neon`
 
@@ -74,16 +73,19 @@ services:
 That's it!
 
 
-## Limit Access by Role or Module
+### Limit Access by Role
 
-Use case 1: show deleted content only to logged user with *admin* role.
-So we can turn on the filtering when all these conditions are not met.
+The management wants to show deleted content only to logged user with *admin* role.
+
+To setup condition, we just implement [`Zenify\DoctrineFilters\Contract\ConditonalFilterInterface`](...).
+
 
 ```php
 use Nette\Security\User;
-use Zenify\DoctrineFilters\AbstractFilter;
+use Zenify\DoctrineFilters\Contract\ConditionalFilterInterface;
 
-class SoftdeletableFilter extends AbstractFilter
+
+class SoftdeletableFilter extends ConditionalFilterInterface
 {
 
 	/**
@@ -121,52 +123,4 @@ class SoftdeletableFilter extends AbstractFilter
 }
 ```
 
----
-
-Use case 2: show deleted content only in *admin* module. 
-
-```php
-use Nette\Application\Application;
-use Nette\Application\UI\Presenter;
-use Zenify\DoctrineFilters\AbstractFilter;
-
-
-class SoftdeletableFilter extends AbstractFilter
-{
-
-	/**
-	 * @var Application
-	 */
-	private $application;
-	
-
-	public function __construct(Application $application)
-	{
-		$this->application = $application;
-	}
-
-	
-	/**
-	 * @return string
-	 */
-	public function addFilterConstraint(ClassMetadata $entity, $alias)
-	{
-		// same as above
-	}
-	
-	
-	/**
-	 * @return bool
-	 */
-	public function isEnabled()
-	{
-		/** @var Presenter $presenter */
-	    $presenter = $this->application->getPresenter();
-		if (strpos($presenter->getReflection()->name, 'AdminModule') !== FALSE) {
-			return FALSE;
-		}
-		return TRUE;
-	}
-	
-}
-```
+Voilá!

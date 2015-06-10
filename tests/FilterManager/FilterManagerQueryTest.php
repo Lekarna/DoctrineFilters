@@ -9,7 +9,7 @@ use PHPUnit_Framework_TestCase;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 use Zenify\DoctrineFilters\FilterManager;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
-use Zenify\DoctrineFilters\Tests\Entities\Product;
+use Zenify\DoctrineFilters\Tests\Entity\Product;
 
 
 class FilterManagerQueryTest extends PHPUnit_Framework_TestCase

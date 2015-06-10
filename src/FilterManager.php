@@ -7,43 +7,53 @@
 
 namespace Zenify\DoctrineFilters;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Zenify\DoctrineFilters\Contract\ConditionalFilterInterface;
+use Zenify\DoctrineFilters\Contract\FilterInterface;
+use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 
-class FilterManager
+
+class FilterManager implements FilterManagerInterface
 {
 
 	/**
-	 * @var AbstractFilter[]
+	 * @var FilterInterface[]
 	 */
 	private $filters = [];
 
 	/**
-	 * @var FilterCollection
+	 * @var EntityManagerInterface
 	 */
-	private $filterCollection;
+	private $entityManager;
 
 
-	public function __construct(FilterCollection $filterCollection)
+	public function __construct(EntityManagerInterface $entityManager)
 	{
-		$this->filterCollection = $filterCollection;
+		$this->entityManager = $entityManager;
 	}
 
 
 	/**
-	 * @param string $name
-	 * @param AbstractFilter $filter
+	 * {@inheritdoc}
 	 */
-	public function addFilter($name, AbstractFilter $filter)
+	public function addFilter($name, FilterInterface $filter)
 	{
 		$this->filters[$name] = $filter;
 	}
 
 
-	public function attachEnabledFilters()
+	/**
+	 * {@inheritdoc}
+	 */
+	public function enableFilters()
 	{
+		$filterCollection = $this->entityManager->getFilters();
 		foreach ($this->filters as $name => $filter) {
-			if ($filter->isEnabled()) {
-				$this->filterCollection->attach($name, $filter);
+			if ($filter instanceof ConditionalFilterInterface && ! $filter->isEnabled()) {
+				continue;
 			}
+
+			$filterCollection->enable($name);
 		}
 	}
 

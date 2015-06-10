@@ -64,8 +64,8 @@ class FilterManagerQueryTest extends PHPUnit_Framework_TestCase
 	{
 		$connection->query('CREATE TABLE product (id INTEGER NOT NULL, name string, is_active int NULL, PRIMARY KEY(id))');
 
-		$this->entityManager->persist(new Product('Brand new ruler'));
-		$this->entityManager->persist(new Product('Black screw', FALSE));
+		$this->entityManager->persist(new Product(TRUE));
+		$this->entityManager->persist(new Product(FALSE));
 		$this->entityManager->flush();
 	}
 

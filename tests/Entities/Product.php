@@ -21,12 +21,6 @@ class Product
 	private $id;
 
 	/**
-	 * @ORM\Column(type="string", nullable=TRUE)
-	 * @var string
-	 */
-	private $name;
-
-	/**
 	 * @ORM\Column(type="boolean")
 	 * @var bool
 	 */
@@ -34,11 +28,12 @@ class Product
 
 
 	/**
-	 * @return int
+	 * @param string $name
+	 * @param bool $isActive
 	 */
-	public function getId()
+	public function __construct($isActive)
 	{
-		return $this->id;
+		$this->isActive = $isActive;
 	}
 
 
@@ -48,33 +43,6 @@ class Product
 	public function isActive()
 	{
 		return $this->isActive;
-	}
-
-
-	/**
-	 * @param bool $isActive
-	 */
-	public function setIsActive($isActive)
-	{
-		$this->isActive = $isActive;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-
-	/**
-	 * @param string $name
-	 */
-	public function setName($name)
-	{
-		$this->name = $name;
 	}
 
 }

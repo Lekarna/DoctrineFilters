@@ -25,7 +25,7 @@ Register extension in `config.neon`:
 ```yaml
 extensions:
 	- Zenify\DoctrineFilters\DI\FiltersExtension
-	- Symnedi\EventDispatcher\DI\EventDispatcherExtensions
+	- Symnedi\EventDispatcher\DI\EventDispatcherExtension
 	- Kdyby\Doctrine\DI\OrmExtension
 ```
 

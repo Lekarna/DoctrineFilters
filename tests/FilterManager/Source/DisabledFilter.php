@@ -1,13 +1,13 @@
 <?php
 
-namespace Zenify\DoctrineFilters\Tests\Filters;
+namespace Zenify\DoctrineFilters\Tests\FilterManager\Source;
 
 use DateTime;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Zenify\DoctrineFilters\AbstractFilter;
+use Zenify\DoctrineFilters\Contract\ConditionalFilterInterface;
 
 
-class ConditionFilter extends AbstractFilter
+class DisabledFilter implements ConditionalFilterInterface
 {
 
 	/**
@@ -24,11 +24,6 @@ class ConditionFilter extends AbstractFilter
 	 */
 	public function isEnabled()
 	{
-		$date = new DateTime;
-		if ($date->format('H') >= 12) {
-			return TRUE;
-		}
-
 		return FALSE;
 	}
 

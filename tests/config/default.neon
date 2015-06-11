@@ -1,12 +1,18 @@
+application:
+	scanComposer: false
+
+
 services:
-	- {class: Zenify\DoctrineFilters\Tests\Filters\ActiveFilter, tags: [zenify.doctrine.filter]}
-	- {class: Zenify\DoctrineFilters\Tests\Filters\ConditionFilter, tags: [zenify.doctrine.filter]}
+	- Zenify\DoctrineFilters\Tests\FilterManager\Source\ActiveFilter
+	- Zenify\DoctrineFilters\Tests\FilterManager\Source\EnabledFilter
+	- Zenify\DoctrineFilters\Tests\FilterManager\Source\DisabledFilter
+
 
 extensions:
-	- Kdyby\Console\DI\ConsoleExtension
+	doctrine: Kdyby\Doctrine\DI\OrmExtension
+	- Symnedi\EventDispatcher\DI\EventDispatcherExtension # intentionally above Kdyby\Events due to removeDefinition bug
 	- Kdyby\Events\DI\EventsExtension
 	- Kdyby\Annotations\DI\AnnotationsExtension
-	doctrine: Kdyby\Doctrine\DI\OrmExtension
 	- Zenify\DoctrineFilters\DI\FiltersExtension
 
 

@@ -1,0 +1,72 @@
+<?php
+
+namespace Zenify\DoctrineFilters\Tests\FilterManager;
+
+use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
+use PHPUnit_Framework_TestCase;
+use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
+use Zenify\DoctrineFilters\FilterManager;
+use Zenify\DoctrineFilters\Tests\ContainerFactory;
+use Zenify\DoctrineFilters\Tests\Entity\Product;
+
+
+class FilterManagerQueryTest extends PHPUnit_Framework_TestCase
+{
+
+	/**
+	 * @var EntityManagerInterface
+	 */
+	private $entityManager;
+
+	/**
+	 * @var EntityRepository
+	 */
+	private $productRepository;
+
+	/**
+	 * @var FilterManagerInterface
+	 */
+	private $filterManager;
+
+
+	protected function setUp()
+	{
+		$container = (new ContainerFactory)->create();
+		$this->entityManager = $container->getByType(EntityManagerInterface::class);
+		$this->filterManager = $container->getByType(FilterManager::class);
+		$this->productRepository = $this->entityManager->getRepository(Product::class);
+
+		$this->prepareDbData($container->getByType(Connection::class));
+	}
+
+
+	public function testFindOneBy()
+	{
+		$this->filterManager->enableFilters();
+
+		$product = $this->productRepository->findOneBy(['id' => 1]);
+		$this->assertInstanceOf(Product::class, $product);
+		$this->assertTrue($product->isActive());
+
+		$product2 = $this->productRepository->findOneBy(['id' => 2]);
+		$this->assertNull($product2);
+
+		// this should be NULL; this appears only in CLI
+		$product2 = $this->productRepository->find(2);
+		$this->assertInstanceOf(Product::class, $product2);
+		$this->assertFalse($product2->isActive());
+	}
+
+
+	private function prepareDbData(Connection $connection)
+	{
+		$connection->query('CREATE TABLE product (id INTEGER NOT NULL, name string, is_active int NULL, PRIMARY KEY(id))');
+
+		$this->entityManager->persist(new Product(TRUE));
+		$this->entityManager->persist(new Product(FALSE));
+		$this->entityManager->flush();
+	}
+
+}

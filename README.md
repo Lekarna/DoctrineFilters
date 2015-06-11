@@ -35,7 +35,7 @@ extensions:
 Let's create our first filter, which will hide all deleted items on front.
 So called "soft delete" - data remains in database, but are filtered out in frontend.
 
-First, we create class implementing [`Zenify\DoctrineFilters\Contract\FilterInterface`](...)
+First, we create class implementing [Zenify\DoctrineFilters\Contract\FilterInterface](src/Contract/FilterInterface.php).
 
 ```php
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -77,7 +77,7 @@ That's it!
 
 The management wants to show deleted content only to logged user with *admin* role.
 
-To setup condition, we just implement [`Zenify\DoctrineFilters\Contract\ConditonalFilterInterface`](...).
+To setup condition, we just implement [Zenify\DoctrineFilters\Contract\ConditionalFilterInterface](src/Contract/ConditionalFilterInterface.php).
 
 
 ```php

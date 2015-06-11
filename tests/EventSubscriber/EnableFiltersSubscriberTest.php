@@ -10,7 +10,7 @@ use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
 
 
-class LoadFiltersSubscriberTest extends PHPUnit_Framework_TestCase
+class EnableFiltersSubscriberTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

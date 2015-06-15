@@ -8,6 +8,7 @@
 namespace Zenify\DoctrineFilters;
 
 use Doctrine\ORM\EntityManagerInterface;
+use ReflectionClass;
 use Zenify\DoctrineFilters\Contract\ConditionalFilterInterface;
 use Zenify\DoctrineFilters\Contract\FilterInterface;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
@@ -47,14 +48,31 @@ class FilterManager implements FilterManagerInterface
 	 */
 	public function enableFilters()
 	{
-		$filterCollection = $this->entityManager->getFilters();
 		foreach ($this->filters as $name => $filter) {
 			if ($filter instanceof ConditionalFilterInterface && ! $filter->isEnabled()) {
 				continue;
 			}
 
-			$filterCollection->enable($name);
+			$this->addFilterToEnabledInFilterCollection($name, $filter);
 		}
+	}
+
+
+	/**
+	 * @param string $name
+	 * @param FilterInterface $filter
+	 */
+	private function addFilterToEnabledInFilterCollection($name, FilterInterface $filter)
+	{
+		$filterCollection = $this->entityManager->getFilters();
+
+		$filterCollectionReflection = new ReflectionClass($filterCollection);
+		$enabledFiltersReflection = $filterCollectionReflection->getProperty('enabledFilters');
+		$enabledFiltersReflection->setAccessible(TRUE);
+
+		$enabledFilters = $enabledFiltersReflection->getValue($filterCollection);
+		$enabledFilters[$name] = $filter;
+		$enabledFiltersReflection->setValue($filterCollection, $enabledFilters);
 	}
 
 }

@@ -47,7 +47,7 @@ class FiltersExtensionTest extends PHPUnit_Framework_TestCase
 			$containerBuilder->getByType(FilterManagerInterface::class)
 		);
 		$this->assertSame('addFilter', $filterManagerDefinition->getSetup()[0]->getEntity());
-		$this->assertSame(['filter', '@' . ActiveFilter::class], $filterManagerDefinition->getSetup()[0]->arguments);
+		$this->assertSame(['filter', '@filter'], $filterManagerDefinition->getSetup()[0]->arguments);
 	}
 
 

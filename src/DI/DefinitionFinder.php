@@ -47,4 +47,25 @@ class DefinitionFinder implements DefinitionFinderInterface
 		);
 	}
 
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getServiceNameByType($type)
+	{
+		$this->containerBuilder->prepareClassList();
+
+		if ($name = $this->containerBuilder->getByType($type)) {
+			return $name;
+		}
+
+		foreach ($this->containerBuilder->findByType($type) as $name => $definition) {
+			return $name;
+		}
+
+		throw new DefinitionForTypeNotFoundException(
+			sprintf('Definition for type "%s" was not found.', $type)
+		);
+	}
+
 }

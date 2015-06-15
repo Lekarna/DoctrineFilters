@@ -19,4 +19,11 @@ interface DefinitionFinderInterface
 	 */
 	function getDefinitionByType($type);
 
+
+	/**
+	 * @param string $type
+	 * @return string
+	 */
+	function getServiceNameByType($type);
+
 }

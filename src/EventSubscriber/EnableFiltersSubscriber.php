@@ -22,7 +22,7 @@ class EnableFiltersSubscriber implements EventSubscriberInterface
 	private $filterManager;
 
 
-	public function __construct(FilterManagerInterface $filterManager)
+	public function setFilterManager(FilterManagerInterface $filterManager)
 	{
 		$this->filterManager = $filterManager;
 	}

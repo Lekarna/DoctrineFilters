@@ -8,7 +8,6 @@
 namespace Zenify\DoctrineFilters\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symnedi\EventDispatcher\Event\ApplicationRequestEvent;
 use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 
@@ -33,11 +32,11 @@ class EnableFiltersSubscriber implements EventSubscriberInterface
 	 */
 	public static function getSubscribedEvents()
 	{
-		return [NetteApplicationEvents::ON_REQUEST => 'onRequest'];
+		return [NetteApplicationEvents::ON_PRESENTER => 'onPresenter'];
 	}
 
 
-	public function onRequest(ApplicationRequestEvent $applicationRequestEvent)
+	public function onPresenter()
 	{
 		$this->filterManager->enableFilters();
 	}

@@ -42,7 +42,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Zenify\DoctrineFilters\Contract\FilterInterface;
 
 
-class SoftdeletableFilter extends FilterInterface
+class SoftdeletableFilter implements FilterInterface
 {
 
 	/**
@@ -85,7 +85,7 @@ use Nette\Security\User;
 use Zenify\DoctrineFilters\Contract\ConditionalFilterInterface;
 
 
-class SoftdeletableFilter extends ConditionalFilterInterface
+class SoftdeletableFilter implements ConditionalFilterInterface
 {
 
 	/**

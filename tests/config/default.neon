@@ -10,8 +10,8 @@ services:
 
 extensions:
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
-	- Symnedi\EventDispatcher\DI\EventDispatcherExtension # intentionally above Kdyby\Events due to removeDefinition bug
 	- Kdyby\Events\DI\EventsExtension
+	- Symnedi\EventDispatcher\DI\EventDispatcherExtension
 	- Kdyby\Annotations\DI\AnnotationsExtension
 	- Zenify\DoctrineFilters\DI\FiltersExtension
 

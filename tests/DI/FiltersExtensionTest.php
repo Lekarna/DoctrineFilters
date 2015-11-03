@@ -12,7 +12,7 @@ use Zenify\DoctrineFilters\FilterManager;
 use Zenify\DoctrineFilters\Tests\FilterManager\Source\ActiveFilter;
 
 
-class FiltersExtensionTest extends PHPUnit_Framework_TestCase
+final class FiltersExtensionTest extends PHPUnit_Framework_TestCase
 {
 
 	public function testLoadConfiguration()

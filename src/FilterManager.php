@@ -14,7 +14,7 @@ use Zenify\DoctrineFilters\Contract\FilterInterface;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 
 
-class FilterManager implements FilterManagerInterface
+final class FilterManager implements FilterManagerInterface
 {
 
 	/**

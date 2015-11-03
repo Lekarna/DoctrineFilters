@@ -10,7 +10,7 @@ use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
 
 
-class FilterManagerTest extends PHPUnit_Framework_TestCase
+final class FilterManagerTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

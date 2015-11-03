@@ -12,7 +12,7 @@ use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 
 
-class EnableFiltersSubscriber implements EventSubscriberInterface
+final class EnableFiltersSubscriber implements EventSubscriberInterface
 {
 
 	/**

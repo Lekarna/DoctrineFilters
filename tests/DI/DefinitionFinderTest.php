@@ -10,7 +10,7 @@ use Zenify\DoctrineFilters\DI\DefinitionFinder;
 use Zenify\DoctrineFilters\Exception\DefinitionForTypeNotFoundException;
 
 
-class DefinitionFinderTest extends PHPUnit_Framework_TestCase
+final class DefinitionFinderTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

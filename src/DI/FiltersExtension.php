@@ -15,7 +15,7 @@ use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 use Zenify\DoctrineFilters\EventSubscriber\EnableFiltersSubscriber;
 
 
-class FiltersExtension extends CompilerExtension
+final class FiltersExtension extends CompilerExtension
 {
 
 	/**
@@ -24,16 +24,22 @@ class FiltersExtension extends CompilerExtension
 	private $definitionFinder;
 
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function loadConfiguration()
 	{
 		$containerBuilder = $this->getContainerBuilder();
-		$services = $this->loadFromFile(__DIR__ . '/services.neon');
+		$services = $this->loadFromFile(__DIR__ . '/../config/services.neon');
 		$this->compiler->parseServices($containerBuilder, $services);
 
 		$this->definitionFinder = new DefinitionFinder($containerBuilder);
 	}
 
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function beforeCompile()
 	{
 		$containerBuilder = $this->getContainerBuilder();

@@ -12,7 +12,7 @@ use Zenify\DoctrineFilters\Tests\ContainerFactory;
 use Zenify\DoctrineFilters\Tests\Entity\Product;
 
 
-class FilterManagerQueryTest extends PHPUnit_Framework_TestCase
+final class FilterManagerQueryTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

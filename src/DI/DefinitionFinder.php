@@ -12,7 +12,7 @@ use Zenify\DoctrineFilters\Contract\DI\DefinitionFinderInterface;
 use Zenify\DoctrineFilters\Exception\DefinitionForTypeNotFoundException;
 
 
-class DefinitionFinder implements DefinitionFinderInterface
+final class DefinitionFinder implements DefinitionFinderInterface
 {
 
 	/**

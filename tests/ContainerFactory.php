@@ -6,7 +6,7 @@ use Nette\Configurator;
 use Nette\DI\Container;
 
 
-class ContainerFactory
+final class ContainerFactory
 {
 
 	/**

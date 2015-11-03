@@ -48,8 +48,6 @@ final class FiltersExtension extends CompilerExtension
 		$filterManagerDefinition = $definitionFinder->getDefinitionByType(FilterManagerInterface::class);
 		$ormConfigurationDefinition = $definitionFinder->getDefinitionByType(Configuration::class);
 
-//		$filterManagerDefinition->addSetup('setEntityManager');
-
 		foreach ($containerBuilder->findByType(FilterInterface::class) as $name => $filterDefinition) {
 			// 1) to filter manager to run conditions and enable allowed only
 			$filterManagerDefinition->addSetup('addFilter', [$name, '@' . $name]);

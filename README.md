@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/travis/Zenify/DoctrineFilters.svg?style=flat-square)](https://travis-ci.org/Zenify/DoctrineFilters)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Zenify/DoctrineFilters.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineFilters)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Zenify/DoctrineFilters.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/DoctrineFilters)
-[![Downloads this Month](https://img.shields.io/packagist/dm/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
+[![Downloads](https://img.shields.io/packagist/dt/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
 [![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
 
 

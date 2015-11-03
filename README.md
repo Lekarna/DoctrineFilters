@@ -7,14 +7,12 @@
 [![Latest stable](https://img.shields.io/packagist/v/zenify/doctrine-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/doctrine-filters)
 
 
-What are Doctrine Filters? Check [these few slides](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15) to get the knowledge.
+What are Doctrine Filters? Check [these few slides](https://speakerdeck.com/rosstuck/extending-doctrine-2-for-your-domain-model?slide=15) or see [Usage](#usage) to get the knowledge.
 
 They are present in Doctrine by default. This package only simplifies their use in modular application.
 
 
 ## Install
-
-Via Composer:
 
 ```sh
 $ composer require zenify/doctrine-filters
@@ -26,7 +24,8 @@ Register extension in `config.neon`:
 extensions:
 	- Zenify\DoctrineFilters\DI\FiltersExtension
 	- Symnedi\EventDispatcher\DI\EventDispatcherExtension
-	- Kdyby\Doctrine\DI\OrmExtension
+	
+	# Kdyby\Doctrine or another Doctrine to Nette implementation
 ```
 
 
@@ -42,11 +41,11 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Zenify\DoctrineFilters\Contract\FilterInterface;
 
 
-class SoftdeletableFilter implements FilterInterface
+final class SoftdeletableFilter implements FilterInterface
 {
 
 	/**
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function addFilterConstraint(ClassMetadata $entity, $alias)
 	{
@@ -70,7 +69,7 @@ services:
 ```
 
 
-That's it!
+And that's it!
 
 
 ### Limit Access by Role
@@ -85,7 +84,7 @@ use Nette\Security\User;
 use Zenify\DoctrineFilters\Contract\ConditionalFilterInterface;
 
 
-class SoftdeletableFilter implements ConditionalFilterInterface
+final class SoftdeletableFilter implements ConditionalFilterInterface
 {
 
 	/**
@@ -101,7 +100,7 @@ class SoftdeletableFilter implements ConditionalFilterInterface
 
 	
 	/**
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function addFilterConstraint(ClassMetadata $entity, $alias)
 	{
@@ -110,7 +109,7 @@ class SoftdeletableFilter implements ConditionalFilterInterface
 	
 	
 	/**
-	 * @return bool
+	 * {@inheritdoc}
 	 */
 	public function isEnabled()
 	{

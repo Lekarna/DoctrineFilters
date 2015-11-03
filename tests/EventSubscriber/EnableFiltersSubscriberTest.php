@@ -3,6 +3,8 @@
 namespace Zenify\DoctrineFilters\Tests\EventSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Nette\Application\Application;
+use Nette\Application\IPresenter;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symnedi\EventDispatcher\Event\ApplicationPresenterEvent;
@@ -38,8 +40,12 @@ class EnableFiltersSubscriberTest extends PHPUnit_Framework_TestCase
 		$filters = $this->entityManager->getFilters();
 		$this->assertCount(0, $filters->getEnabledFilters());
 
-		$eventMock = $this->prophesize(ApplicationPresenterEvent::class);
-		$this->eventDispatcher->dispatch(NetteApplicationEvents::ON_PRESENTER, $eventMock->reveal());
+		$applicationMock = $this->prophesize(Application::class);
+		$presenterMock = $this->prophesize(IPresenter::class);
+		$applicationPresenterEvent = new ApplicationPresenterEvent(
+			$applicationMock->reveal(), $presenterMock->reveal()
+		);
+		$this->eventDispatcher->dispatch(NetteApplicationEvents::ON_PRESENTER, $applicationPresenterEvent);
 
 		$this->assertCount(2, $filters->getEnabledFilters());
 	}

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Zenify\DoctrineFilters\Contract\ConditionalFilterInterface;
 
 
-class EnabledFilter implements ConditionalFilterInterface
+final class EnabledFilter implements ConditionalFilterInterface
 {
 
 	/**

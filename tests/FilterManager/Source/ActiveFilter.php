@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Zenify\DoctrineFilters\Contract\FilterInterface;
 
 
-class ActiveFilter implements FilterInterface
+final class ActiveFilter implements FilterInterface
 {
 
 	/**

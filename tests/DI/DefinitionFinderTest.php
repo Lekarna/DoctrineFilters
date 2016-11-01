@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\DoctrineFilters\Tests\DI;
 
 use Nette\DI\ContainerBuilder;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use stdClass;
-use Zenify\DoctrineFilters\Contract\DI\DefinitionFinderInterface;
 use Zenify\DoctrineFilters\DI\DefinitionFinder;
 use Zenify\DoctrineFilters\Exception\DefinitionForTypeNotFoundException;
 
 
-final class DefinitionFinderTest extends PHPUnit_Framework_TestCase
+final class DefinitionFinderTest extends TestCase
 {
 
 	/**
@@ -19,7 +20,7 @@ final class DefinitionFinderTest extends PHPUnit_Framework_TestCase
 	private $containerBuilder;
 
 	/**
-	 * @var DefinitionFinderInterface
+	 * @var DefinitionFinder
 	 */
 	private $definitionFinder;
 
@@ -50,9 +51,11 @@ final class DefinitionFinderTest extends PHPUnit_Framework_TestCase
 	}
 
 
+	/**
+	 * @expectedException \Zenify\DoctrineFilters\Exception\DefinitionForTypeNotFoundException
+	 */
 	public function testMissing()
 	{
-		$this->setExpectedException(DefinitionForTypeNotFoundException::class);
 		$this->definitionFinder->getDefinitionByType(stdClass::class);
 	}
 

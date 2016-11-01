@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\DoctrineFilters\Tests\FilterManager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\FilterCollection;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Zenify\DoctrineFilters\Contract\FilterInterface;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
 
 
-final class FilterManagerTest extends PHPUnit_Framework_TestCase
+final class FilterManagerTest extends TestCase
 {
 
 	/**

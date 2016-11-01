@@ -61,9 +61,9 @@ final class SoftdeletableFilter implements FilterInterface
 
 Then register as service:
 
-`config.neon`
 
 ```yaml
+# app/config/config.neon
 services:
 	- SoftdeletableFilter
 ```
@@ -99,19 +99,13 @@ final class SoftdeletableFilter implements ConditionalFilterInterface
 	}
 
 	
-	/**
-	 * {@inheritdoc}
-	 */
 	public function addFilterConstraint(ClassMetadata $entity, $alias)
 	{
 		// same as above
 	}
 	
 	
-	/**
-	 * {@inheritdoc}
-	 */
-	public function isEnabled()
+	public function isEnabled() : bool
 	{
 		if ($this->user->isLoggedIn() && $this->user->hasRole('admin')) {
 			return FALSE;
@@ -123,3 +117,23 @@ final class SoftdeletableFilter implements ConditionalFilterInterface
 ```
 
 Voilá!
+
+
+
+## Testing
+
+```sh
+composer check-cs
+vendor/bin/phpunit
+```
+
+
+## Contributing
+
+Rules are simple:
+
+- new feature needs tests
+- all tests must pass
+- 1 feature per PR
+
+We would be happy to merge your feature then!

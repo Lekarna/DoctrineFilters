@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -34,18 +36,12 @@ final class FilterManager implements FilterManagerInterface
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function addFilter($name, FilterInterface $filter)
+	public function addFilter(string $name, FilterInterface $filter)
 	{
 		$this->filters[$name] = $filter;
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function enableFilters()
 	{
 		foreach ($this->filters as $name => $filter) {
@@ -58,11 +54,7 @@ final class FilterManager implements FilterManagerInterface
 	}
 
 
-	/**
-	 * @param string $name
-	 * @param FilterInterface $filter
-	 */
-	private function addFilterToEnabledInFilterCollection($name, FilterInterface $filter)
+	private function addFilterToEnabledInFilterCollection(string $name, FilterInterface $filter)
 	{
 		$filterCollection = $this->entityManager->getFilters();
 

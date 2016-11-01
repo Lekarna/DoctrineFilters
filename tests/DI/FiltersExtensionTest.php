@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\DoctrineFilters\Tests\DI;
 
 use Doctrine\ORM\Configuration;
 use Nette\DI\Compiler;
 use Nette\DI\ContainerBuilder;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 use Zenify\DoctrineFilters\DI\FiltersExtension;
 use Zenify\DoctrineFilters\FilterManager;
 use Zenify\DoctrineFilters\Tests\FilterManager\Source\ActiveFilter;
 
 
-final class FiltersExtensionTest extends PHPUnit_Framework_TestCase
+final class FiltersExtensionTest extends TestCase
 {
 
 	public function testLoadConfiguration()
@@ -51,10 +53,7 @@ final class FiltersExtensionTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * @return FiltersExtension
-	 */
-	private function getExtension()
+	private function getExtension() : FiltersExtension
 	{
 		$extension = new FiltersExtension;
 		$extension->setCompiler(new Compiler(new ContainerBuilder), 'filters');

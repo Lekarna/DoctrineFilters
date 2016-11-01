@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -9,7 +11,6 @@ namespace Zenify\DoctrineFilters\DI;
 
 use Doctrine\ORM\Configuration;
 use Nette\DI\CompilerExtension;
-use Zenify\DoctrineFilters\Contract\DI\DefinitionFinderInterface;
 use Zenify\DoctrineFilters\Contract\FilterInterface;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
 use Zenify\DoctrineFilters\EventSubscriber\EnableFiltersSubscriber;
@@ -19,14 +20,11 @@ final class FiltersExtension extends CompilerExtension
 {
 
 	/**
-	 * @var DefinitionFinderInterface
+	 * @var DefinitionFinder
 	 */
 	private $definitionFinder;
 
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function loadConfiguration()
 	{
 		$containerBuilder = $this->getContainerBuilder();
@@ -37,9 +35,6 @@ final class FiltersExtension extends CompilerExtension
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function beforeCompile()
 	{
 		$containerBuilder = $this->getContainerBuilder();

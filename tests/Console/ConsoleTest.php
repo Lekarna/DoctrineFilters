@@ -39,7 +39,7 @@ final class ConsoleTest extends TestCase
 	{
 		$this->assertCount(0, $this->entityManager->getFilters()->getEnabledFilters());
 
-		$this->consoleApplication->run(new ArgvInput(), new NullOutput());
+		$this->consoleApplication->run(new ArgvInput, new NullOutput);
 
 		$this->assertCount(2, $this->entityManager->getFilters()->getEnabledFilters());
 	}
@@ -49,11 +49,11 @@ final class ConsoleTest extends TestCase
 	{
 		$this->assertCount(0, $this->entityManager->getFilters()->getEnabledFilters());
 
-		$this->consoleApplication->run(new ArgvInput(), new NullOutput());
+		$this->consoleApplication->run(new ArgvInput, new NullOutput);
 
 		$this->assertCount(2, $this->entityManager->getFilters()->getEnabledFilters());
 
-		$this->consoleApplication->run(new ArgvInput(), new NullOutput());
+		$this->consoleApplication->run(new ArgvInput, new NullOutput);
 
 		$this->assertCount(2, $this->entityManager->getFilters()->getEnabledFilters());
 	}

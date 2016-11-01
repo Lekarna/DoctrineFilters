@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Zenify\DoctrineFilters\EventSubscriber;
 
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Zenify\DoctrineFilters\Contract\FilterManagerInterface;
@@ -31,11 +32,14 @@ final class EnableFiltersSubscriber implements EventSubscriberInterface
 
 	public static function getSubscribedEvents() : array
 	{
-		return [NetteApplicationEvents::ON_PRESENTER => 'onPresenter'];
+		return [
+			ConsoleEvents::COMMAND => 'enableFilters',
+			NetteApplicationEvents::ON_PRESENTER => 'enableFilters'
+		];
 	}
 
 
-	public function onPresenter()
+	public function enableFilters()
 	{
 		$this->filterManager->enableFilters();
 	}

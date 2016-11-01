@@ -7,6 +7,8 @@ services:
 	- Zenify\DoctrineFilters\Tests\FilterManager\Source\EnabledFilter
 	- Zenify\DoctrineFilters\Tests\FilterManager\Source\DisabledFilter
 
+	- Symfony\Component\Console\Application
+
 
 extensions:
 	doctrine: Kdyby\Doctrine\DI\OrmExtension

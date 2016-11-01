@@ -29,6 +29,11 @@ final class FilterManager implements FilterManagerInterface
 	 */
 	private $entityManager;
 
+	/**
+	 * @var bool
+	 */
+	private $areFiltersEnabled = FALSE;
+
 
 	public function __construct(EntityManagerInterface $entityManager)
 	{
@@ -44,6 +49,10 @@ final class FilterManager implements FilterManagerInterface
 
 	public function enableFilters()
 	{
+		if ($this->areFiltersEnabled) {
+			return;
+		}
+
 		foreach ($this->filters as $name => $filter) {
 			if ($filter instanceof ConditionalFilterInterface && ! $filter->isEnabled()) {
 				continue;
@@ -51,6 +60,8 @@ final class FilterManager implements FilterManagerInterface
 
 			$this->addFilterToEnabledInFilterCollection($name, $filter);
 		}
+
+		$this->areFiltersEnabled = TRUE;
 	}
 
 

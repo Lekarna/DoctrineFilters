@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -8,11 +10,11 @@
 namespace Zenify\DoctrineFilters\DI;
 
 use Nette\DI\ContainerBuilder;
-use Zenify\DoctrineFilters\Contract\DI\DefinitionFinderInterface;
+use Nette\DI\ServiceDefinition;
 use Zenify\DoctrineFilters\Exception\DefinitionForTypeNotFoundException;
 
 
-final class DefinitionFinder implements DefinitionFinderInterface
+final class DefinitionFinder
 {
 
 	/**
@@ -27,10 +29,7 @@ final class DefinitionFinder implements DefinitionFinderInterface
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getDefinitionByType($type)
+	public function getDefinitionByType(string $type) : ServiceDefinition
 	{
 		$this->containerBuilder->prepareClassList();
 
@@ -48,10 +47,7 @@ final class DefinitionFinder implements DefinitionFinderInterface
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getServiceNameByType($type)
+	public function getServiceNameByType(string $type) : string
 	{
 		$this->containerBuilder->prepareClassList();
 

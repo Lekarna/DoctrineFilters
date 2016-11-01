@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -13,11 +15,6 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 interface FilterInterface
 {
 
-	/**
-	 * @param ClassMetadata $targetEntity
-	 * @param string $targetTableAlias
-	 * @return string
-	 */
-	function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias);
+	public function addFilterConstraint(ClassMetadata $targetEntity, string $targetTableAlias) : string;
 
 }

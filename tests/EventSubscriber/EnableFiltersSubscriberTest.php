@@ -1,19 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\DoctrineFilters\Tests\EventSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Nette\Application\Application;
 use Nette\Application\IPresenter;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symnedi\EventDispatcher\Event\ApplicationPresenterEvent;
-use Symnedi\EventDispatcher\Event\ApplicationRequestEvent;
 use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
 
 
-final class EnableFiltersSubscriberTest extends PHPUnit_Framework_TestCase
+final class EnableFiltersSubscriberTest extends TestCase
 {
 
 	/**

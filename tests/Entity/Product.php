@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\DoctrineFilters\Tests\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -27,20 +29,13 @@ class Product
 	private $isActive = TRUE;
 
 
-	/**
-	 * @param string $name
-	 * @param bool $isActive
-	 */
-	public function __construct($isActive)
+	public function __construct(bool $isActive)
 	{
 		$this->isActive = $isActive;
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public function isActive()
+	public function isActive() : bool
 	{
 		return $this->isActive;
 	}

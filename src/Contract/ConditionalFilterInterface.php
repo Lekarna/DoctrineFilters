@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2012 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -14,9 +16,7 @@ interface ConditionalFilterInterface extends FilterInterface
 	/**
 	 * Resolves conditions that are required to enable filter.
 	 * Filters are active by default.
-	 *
-	 * @return bool
 	 */
-	function isEnabled();
+	public function isEnabled() : bool;
 
 }

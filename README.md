@@ -44,10 +44,7 @@ use Zenify\DoctrineFilters\Contract\FilterInterface;
 final class SoftdeletableFilter implements FilterInterface
 {
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function addFilterConstraint(ClassMetadata $entity, $alias)
+	public function addFilterConstraint(ClassMetadata $entity, string $alias) : string
 	{
 		if ($entity->getReflectionClass()->hasProperty('isDeleted')) {
 			return "$alias.isDeleted = 0");
@@ -99,7 +96,7 @@ final class SoftdeletableFilter implements ConditionalFilterInterface
 	}
 
 	
-	public function addFilterConstraint(ClassMetadata $entity, $alias)
+	public function addFilterConstraint(ClassMetadata $entity, string $alias) : string
 	{
 		// same as above
 	}

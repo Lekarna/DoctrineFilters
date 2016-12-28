@@ -23,7 +23,7 @@ Register extension in `config.neon`:
 ```yaml
 extensions:
 	- Zenify\DoctrineFilters\DI\FiltersExtension
-	- Symnedi\EventDispatcher\DI\EventDispatcherExtension
+	- Symplify\SymfonyEventDispatcher\Adapter\Nette\DI\SymfonyEventDispatcherExtension
 	
 	# Kdyby\Doctrine or another Doctrine to Nette implementation
 ```

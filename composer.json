@@ -10,7 +10,7 @@
 		"doctrine/orm": "~2.5",
 		"nette/application": "~2.4",
 		"nette/di": "~2.4",
-		"symnedi/event-dispatcher": "~0.4"
+		"symplify/symfony-event-dispatcher": "~1.2"
 	},
 	"require-dev": {
 		"kdyby/doctrine": "~3.1",

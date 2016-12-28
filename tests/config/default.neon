@@ -17,7 +17,7 @@ extensions:
 	- Kdyby\Events\DI\EventsExtension
 	- Kdyby\Annotations\DI\AnnotationsExtension
 	- Zenify\DoctrineFilters\DI\FiltersExtension
-	- Symnedi\EventDispatcher\DI\EventDispatcherExtension
+	- Symplify\SymfonyEventDispatcher\Adapter\Nette\DI\SymfonyEventDispatcherExtension
 
 
 doctrine:

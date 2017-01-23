@@ -9,6 +9,7 @@ use Nette\Application\Application;
 use Nette\Application\IPresenter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symplify\SymfonyEventDispatcher\Adapter\Nette\Event\ApplicationStartupEvent;
 use Symplify\SymfonyEventDispatcher\Adapter\Nette\Event\PresenterCreatedEvent;
 use Zenify\DoctrineFilters\Tests\ContainerFactory;
 
@@ -41,11 +42,8 @@ final class EnableFiltersSubscriberTest extends TestCase
 		$this->assertCount(0, $filters->getEnabledFilters());
 
 		$applicationMock = $this->prophesize(Application::class);
-		$presenterMock = $this->prophesize(IPresenter::class);
-		$applicationPresenterEvent = new PresenterCreatedEvent(
-			$applicationMock->reveal(), $presenterMock->reveal()
-		);
-		$this->eventDispatcher->dispatch(PresenterCreatedEvent::NAME, $applicationPresenterEvent);
+		$applicationStartupEvent = new ApplicationStartupEvent($applicationMock->reveal());
+		$this->eventDispatcher->dispatch(ApplicationStartupEvent::NAME, $applicationStartupEvent);
 
 		$this->assertCount(2, $filters->getEnabledFilters());
 	}

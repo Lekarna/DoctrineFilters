@@ -41,12 +41,36 @@ final class FilterManager implements FilterManagerInterface
 	}
 
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function addFilter(string $name, FilterInterface $filter)
 	{
 		$this->filters[$name] = $filter;
 	}
 
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function enableFilter(string $name)
+	{
+		if ( ! isset($this->filters[$name])) {
+			return;
+		}
+
+		$filter = $this->filters[$name];
+		if ($filter instanceof ConditionalFilterInterface && ! $filter->isEnabled()) {
+			return;
+		}
+
+		$this->addFilterToEnabledInFilterCollection($name, $filter);
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
 	public function enableFilters()
 	{
 		if ($this->areFiltersEnabled) {

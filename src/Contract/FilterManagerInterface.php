@@ -16,6 +16,9 @@ interface FilterManagerInterface
 	public function addFilter(string $name, FilterInterface $filter);
 
 
+	public function enableFilter(string $name);
+
+
 	/**
 	 * Enables all filters that meet its conditions.
 	 */

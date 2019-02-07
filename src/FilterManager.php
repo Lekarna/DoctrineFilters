@@ -89,7 +89,7 @@ final class FilterManager implements FilterManagerInterface
 	}
 
 
-	private function addFilterToEnabledInFilterCollection(string $name, FilterInterface $filter)
+	private function addFilterToEnabledInFilterCollection($name, FilterInterface $filter)
 	{
 		$filterCollection = $this->entityManager->getFilters();
 

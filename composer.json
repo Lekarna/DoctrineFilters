@@ -8,8 +8,8 @@
 	"require": {
 		"php": "^7.0",
 		"doctrine/orm": "~2.5",
-		"nette/application": "~2.4",
-		"nette/di": "~2.4",
+		"nette/application": "^3.0",
+		"nette/di": "^3.0",
 		"symplify/symfony-event-dispatcher": "~1.2"
 	},
 	"require-dev": {
